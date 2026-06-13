@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Redirector</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .recommended {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .recommended h3 {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .recommended-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .btn-secondary {
+            background-color: #e4e6eb;
+            color: #050505;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-secondary:hover {
+            background-color: #d8dadf;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Where do you want to go?</h2>
+        
+        <input type="text" id="urlInput" placeholder="Enter a link (e.g. google.com)..." onkeypress="handleKeyPress(event)">
+        <button class="btn-primary" onclick="redirectFromInput()">Go to link</button>
+
+        <div class="recommended">
+            <h3>Recommended links:</h3>
+            <div class="recommended-links">
+                <button class="btn-secondary" onclick="redirectTo('https://google.com')">Google</button>
+                <button class="btn-secondary" onclick="redirectTo('https://y8.com')">Y8</button>
+                <button class="btn-secondary" onclick="redirectTo('https://tiktok.com')">TikTok</button>
+                <button class="btn-secondary" onclick="redirectTo('https://youtube.com/tv')">YouTube TV</button>
+                <button class="btn-secondary" onclick="redirectTo('https://youtube.com')">YouTube</button>
+                <button class="btn-secondary" onclick="redirectTo('https://instagram.com')">Instagram</button>
+                <button class="btn-secondary" onclick="redirectTo('https://games.pixela16.space')">Simple Arcade Games</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Main redirect function
+        function redirectTo(url) {
+            // Check if the user entered the protocol (http or https)
+            // If not, automatically add https://
+            if (!/^https?:\/\//i.test(url)) {
+                url = 'https://' + url;
+            }
+            window.location.href = url;
+        }
+
+        // Process input field
+        function redirectFromInput() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (url) {
+                redirectTo(url);
+            } else {
+                alert('Please enter a valid link!');
+            }
+        }
+
+        // Handle Enter key in the input field
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                redirectFromInput();
+            }
+        }
+    </script>
+
+</body>
+</html>
